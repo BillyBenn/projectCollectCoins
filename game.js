@@ -54,6 +54,9 @@ function itemHandler(player, item) {
      currentScore = currentScore - 25;
   } else if (item.key === 'star') {
      currentScore = currentScore + 25;
+  } else if (item.key === 'keyk') {
+    platforms.create(100, 600, 'platform');
+    platforms.setAll('body.immovable', true);
   }
   if (currentScore === winningScore) {
       createBadge();
