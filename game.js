@@ -24,7 +24,7 @@ function addPlatforms() {
   platforms.create(450, 550, 'platform');
   platforms.create(250, 350, 'platform');
   platforms.create(350, 400, 'platform');
-  platforms.create(100, 250, 'platform');
+  platforms.create(200, 250, 'platform');
   platforms.create(150, 550, 'platform');
   platforms.create(100, 100, 'platform');
   platforms.setAll('body.immovable', true);
