@@ -16,17 +16,15 @@ var winningScore = 100;
 function addItems() {
   items = game.add.physicsGroup();
   createItem(375, 400, 'coin');
-  createItem(575, 500, 'coin');
   createItem(225, 500, 'coin');
-  createItem(100, 250, 'coin');
   createItem(575, 150, 'coin');
-  createItem(525, 300, 'coin');
   createItem(650, 250, 'coin');
   createItem(225, 200, 'coin');
+  createItem(100, 50, 'coin');
   createItem(375, 100, 'poison');
   createItem(370,500,'poison');
   createItem(100, 375, 'poison');
-  createItem(125, 50, 'star');
+  createItem(650, 275, 'star');
 }
 
 // add platforms to the game
@@ -39,10 +37,9 @@ function addPlatforms() {
   platforms.create(50, 300, 'platform');
   platforms.create(150, 250, 'platform');
   platforms.create(650, 300, 'platform');
-  platforms.create(550, 200, 'platform2');
-  platforms.create(300, 450, 'platform2');
-  platforms.create(400, 350, 'platform2');
-  platforms.create(100, 100, 'platform2');
+  platforms.create(550, 200, 'platform');
+  platforms.create(300, 450, 'platform');
+  platforms.create(400, 350, 'platform');
   platforms.setAll('body.immovable', true);
 }
 
@@ -68,11 +65,13 @@ function itemHandler(player, item) {
      currentScore = currentScore + 10;
   } else if (item.key === 'poison') {
      currentScore = currentScore - 25;
-  } else if (item.key === 'star') {
-     currentScore = currentScore + 25;
   }
   if (currentScore === winningScore) {
       createBadge();
+  }
+  if (item.key === 'star') {
+     platforms.create(100, 100, 'platform2');
+     platforms.setAll('body.immovable', true);
   }
 }
 
@@ -85,15 +84,15 @@ function badgeHandler(player, badge) {
 // setup game when the web page loads
 window.onload = function () {
   game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update, render: render });
-  
+
   // before the game begins
   function preload() {
     game.stage.backgroundColor = '#5db1ad';
-    
+
     //Load images
     game.load.image('platform', 'platform_1.png');
     game.load.image('platform2', 'platform_2.png');
-    
+
     //Load spritesheets
     game.load.spritesheet('player', 'chalkers.png', 48, 62);
     game.load.spritesheet('coin', 'coin.png', 36, 44);
@@ -145,7 +144,7 @@ window.onload = function () {
     else {
       player.animations.stop();
     }
-    
+
     if (jumpButton.isDown && (player.body.onFloor() || player.body.touching.down)) {
       player.body.velocity.y = -400;
     }
